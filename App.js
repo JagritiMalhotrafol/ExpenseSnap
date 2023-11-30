@@ -10,6 +10,7 @@ import { FontAwesome5 } from "@expo/vector-icons";
 import * as SplashScreen from 'expo-splash-screen';
 import React, { useEffect } from 'react';
 import Header from "./src/Components/Header/Header";
+import { BudgetProvider } from "./src/Components/GlobalContext/BudgetContext";
 
 SplashScreen.preventAutoHideAsync().catch(console.warn);
 
@@ -32,6 +33,7 @@ export default function App() {
 
   const Tab = createBottomTabNavigator();
   return (
+    <BudgetProvider>
     <NavigationContainer>
       <SafeAreaView style={styles.container}>
         <StatusBar style="auto" />
@@ -93,5 +95,6 @@ export default function App() {
         </Tab.Navigator>
       </SafeAreaView>
     </NavigationContainer>
+    </BudgetProvider>
   );
 }

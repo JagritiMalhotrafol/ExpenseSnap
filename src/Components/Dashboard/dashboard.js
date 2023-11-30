@@ -1,14 +1,16 @@
 import React, { useState } from "react";
 import { Text, View, ScrollView, TextInput, Button } from "react-native";
 import { useNavigation } from '@react-navigation/native';
+import { useBudget } from "./../GlobalContext/BudgetContext";
 import styles from "./style";
 
 const DashboardScreen = () => {
-  const [income, setIncome] = useState(0);
-  const [expenses, setExpenses] = useState(0);
+  // const [income, setIncome] = useState(0);
+  // const [expenses, setExpenses] = useState(0);
   const [tempIncome, setTempIncome] = useState('');
   const [tempExpenses, setTempExpenses] = useState('');
   const navigation = useNavigation(); 
+  const { income, expenses, addIncome, addExpenses } = useBudget();
 
   const savings = income - expenses;
 
@@ -21,7 +23,8 @@ const DashboardScreen = () => {
   const onAddIncomePress = () => {
     const updatedIncome = parseFloat(tempIncome);
     if (!isNaN(updatedIncome)) {
-      setIncome(income + updatedIncome);
+      // setIncome(income + updatedIncome);
+      addIncome(updatedIncome);
     }
     setTempIncome(''); 
   };
@@ -35,13 +38,15 @@ const DashboardScreen = () => {
   const onAddExpensesPress = () => {
     const updatedExpenses = parseFloat(tempExpenses);
     if (!isNaN(updatedExpenses)) {
-      setExpenses(expenses + updatedExpenses);
+      // setExpenses(expenses + updatedExpenses);
+      addExpenses(updatedExpenses); 
     }
     setTempExpenses(''); 
   };
 
   const navigateToBudget = () => {
-    navigation.navigate('Budget', { income, expenses });
+    // navigation.navigate('Budget', { income, expenses });
+    navigation.navigate('Budget');
   };
 
   return (
